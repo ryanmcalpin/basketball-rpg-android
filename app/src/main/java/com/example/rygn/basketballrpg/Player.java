@@ -75,35 +75,19 @@ public class Player {
     // main attribute categories
 
     public int getAthleticism() {
-        return athleticism;
-    }
-
-    public void setAthleticism(int athleticism) {
-        this.athleticism = athleticism;
+        return speed + vertical + strength;
     }
 
     public int getSkill() {
-        return skill;
-    }
-
-    public void setSkill(int skill) {
-        this.skill = skill;
+        return shooting + dribbling + passing;
     }
 
     public int getIq() {
-        return iq;
-    }
-
-    public void setIq(int iq) {
-        this.iq = iq;
+        return playmaking + positioning + foulDraw;
     }
 
     public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
+        return cleanDefense + steal + block;
     }
 
     // specific abilities
