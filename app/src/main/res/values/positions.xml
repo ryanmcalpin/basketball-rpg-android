@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="positions_array">
+        <item>Position</item>
         <item>Point Guard (PG)</item>
         <item>Shooting Guard (SG)</item>
         <item>Small Forward (SF)</item>
