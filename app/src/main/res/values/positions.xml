@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="positions_array">
+        <item>Point Guard (PG)</item>
+        <item>Shooting Guard (SG)</item>
+        <item>Small Forward (SF)</item>
+        <item>Power Forward (PF)</item>
+        <item>Center (C)</item>
+        <item>Guard (PG/SG)</item>
+        <item>Wing (SG/SF)</item>
+        <item>Forward (SF/PF)</item>
+        <item>Big (PF/C)</item>
+    </string-array>
+</resources>
