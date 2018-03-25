@@ -187,4 +187,33 @@ public class Player {
     public void setCleanDefense(int cleanDefense) {
         this.cleanDefense = cleanDefense;
     }
+
+    public void increaseAttribute(String attribute) {
+        switch (attribute) {
+            case "speed": this.speed += 1;
+                break;
+            case "strength": this.strength += 1;
+                break;
+            case "vertical": this.vertical += 1;
+                break;
+            case "shooting": this.shooting += 1;
+                break;
+            case "dribbling": this.dribbling += 1;
+                break;
+            case "passing": this.passing += 1;
+                break;
+            case "playmaking": this.playmaking += 1;
+                break;
+            case "positioning": this.positioning += 1;
+                break;
+            case "foulDraw": this.foulDraw += 1;
+                break;
+            case "cleanDefense": this.cleanDefense += 1;
+                break;
+            case "steal": this.steal += 1;
+                break;
+            case "block": this.block += 1;
+                break;
+        }
+    }
 }
