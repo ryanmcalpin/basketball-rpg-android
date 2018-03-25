@@ -12,9 +12,15 @@ public class NewPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_player);
 
-        Spinner spinner = (Spinner) findViewById(R.id.positions_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.positions_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        Spinner positionsSpinner = (Spinner) findViewById(R.id.positions_spinner);
+        ArrayAdapter<CharSequence> positionsAdapter = ArrayAdapter.createFromResource(this, R.array.positions_array, android.R.layout.simple_spinner_item);
+        positionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        positionsSpinner.setAdapter(positionsAdapter);
+
+        Spinner heightSpinner = (Spinner) findViewById(R.id.height_spinner);
+//        ArrayAdapter<String> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
+        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        heightSpinner.setAdapter(heightAdapter);
     }
 }
