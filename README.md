@@ -1,5 +1,5 @@
 # basketball-rpg
-A native android text-based rpg. Upgrade your skills, make smart and timely on-court decisions, and take your team to the championships!
+A native Android text-based rpg. Upgrade your skills, make smart and timely on-court decisions, and take your team to the championships!
 
 ## Requirements
 * Android Studio 2.3.2 or newer
