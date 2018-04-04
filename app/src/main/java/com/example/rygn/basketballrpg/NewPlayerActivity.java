@@ -9,10 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewPlayerActivity extends Activity implements AdapterView.OnItemSelectedListener {
     Spinner positionsSpinner;
     Spinner heightSpinner;
     Spinner weightSpinner;
+
+    String[] heightArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         positionsSpinner.setOnItemSelectedListener(this);
 
         heightSpinner = (Spinner) findViewById(R.id.height_spinner);
+//        heightArray = getResources().getStringArray(R.array.heights_array);  trying to limit heights based on position
         ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightSpinner.setAdapter(heightAdapter);
@@ -45,6 +51,9 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         } else {
             heightSpinner.setVisibility(View.VISIBLE);
             weightSpinner.setVisibility(View.VISIBLE);
+
+            // set height and weight limits
+
         }
     }
 
