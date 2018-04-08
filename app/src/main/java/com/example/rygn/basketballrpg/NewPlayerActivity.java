@@ -1,11 +1,13 @@
 package com.example.rygn.basketballrpg;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -40,6 +42,16 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(this, R.array.weights_array, android.R.layout.simple_spinner_item);
         weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weightSpinner.setAdapter(weightAdapter);
+
+        Button button = (Button) findViewById(R.id.create_player_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(NewPlayerActivity.this, MainActivity.class);
+                myIntent.putExtra("key", "vaaaluuee");
+                NewPlayerActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
