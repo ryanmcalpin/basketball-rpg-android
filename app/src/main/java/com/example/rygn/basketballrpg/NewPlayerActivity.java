@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
     Spinner positionsSpinner;
     Spinner heightSpinner;
     Spinner weightSpinner;
+    EditText nameInput;
+    EditText jerseyInput;
 
     String[] heightArray;
 
@@ -25,6 +28,9 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_player);
+
+        nameInput = (EditText) findViewById(R.id.nameInput);
+        jerseyInput = (EditText) findViewById(R.id.numberInput);
 
         positionsSpinner = (Spinner) findViewById(R.id.positions_spinner);
         ArrayAdapter<CharSequence> positionsAdapter = ArrayAdapter.createFromResource(this, R.array.positions_array, android.R.layout.simple_spinner_item);
@@ -47,8 +53,14 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = nameInput.getText().toString();
+                String number = jerseyInput.getText().toString();
+                String position = positionsSpinner.toString();
+                String height = heightSpinner.toString();
+                String weight = weightSpinner.toString();
+
                 Intent myIntent = new Intent(NewPlayerActivity.this, MainActivity.class);
-                myIntent.putExtra("key", "vaaaluuee");
+                myIntent.putExtra("name", name);
                 NewPlayerActivity.this.startActivity(myIntent);
             }
         });
