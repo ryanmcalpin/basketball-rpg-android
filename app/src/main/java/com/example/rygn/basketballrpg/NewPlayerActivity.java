@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NewPlayerActivity extends Activity implements AdapterView.OnItemSelectedListener {
@@ -28,7 +29,8 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
 
     Intent myIntent;
 
-    String[] heightArray;
+    List<String> heightsArray;
+    List<String> weightsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +47,19 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         positionsSpinner.setOnItemSelectedListener(this);
 
         heightSpinner = (Spinner) findViewById(R.id.height_spinner);
-//        heightArray = getResources().getStringArray(R.array.heights_array);  trying to limit heights based on position
-        ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
-        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        heightSpinner.setAdapter(heightAdapter);
+        String[] hArray = getResources().getStringArray(R.array.heights_array);
+        heightsArray = Arrays.asList(hArray);
+//        ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
+//        heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        heightSpinner.setAdapter(heightAdapter);
         heightSpinner.setOnItemSelectedListener(this);
 
         weightSpinner = (Spinner) findViewById(R.id.weight_spinner);
-        ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(this, R.array.weights_array, android.R.layout.simple_spinner_item);
-        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        weightSpinner.setAdapter(weightAdapter);
+        String[] wArray = getResources().getStringArray(R.array.weights_array);
+        weightsArray = Arrays.asList(wArray);
+//        ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(this, R.array.weights_array, android.R.layout.simple_spinner_item);
+//        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        weightSpinner.setAdapter(weightAdapter);
         weightSpinner.setOnItemSelectedListener(this);
 
         myIntent = new Intent(NewPlayerActivity.this, MainActivity.class);
@@ -76,32 +81,190 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
         switch (parent.getId()) {
+
             case R.id.positions_spinner:
                 position = parent.getItemAtPosition(pos).toString();
                 myIntent.putExtra("position", position);
+                if (pos == 0) {
+                    heightSpinner.setVisibility(View.INVISIBLE);
+                    weightSpinner.setVisibility(View.INVISIBLE);
+                } else {
+                    heightSpinner.setVisibility(View.VISIBLE);
+//                    weightSpinner.setVisibility(View.VISIBLE);
+
+                    // set height limits based on position
+                    List<String> limitedHeightsArray = new ArrayList<String>();
+                    int startingHeight = 0;
+                    int heightRange = 0;
+                    switch (pos) {
+                        case 0: // no position selected
+                            // validate?
+                            startingHeight = 0;
+                            heightRange = 0;
+                            break;
+                        case 1: // pg
+                            startingHeight = 1;
+                            heightRange = 13;
+                            break;
+                        case 2: // sg
+                            startingHeight = 4;
+                            heightRange = 12;
+                            break;
+                        case 3: // sf
+                            startingHeight = 9;
+                            heightRange = 10;
+                            break;
+                        case 4: // pf
+                            startingHeight = 11;
+                            heightRange = 9;
+                            break;
+                        case 5: // c
+                            startingHeight = 15;
+                            heightRange = 6;
+                            break;
+                        case 6: // guard
+                            startingHeight = 4;
+                            heightRange = 10;
+                            break;
+                        case 7: // wing
+                            startingHeight = 9;
+                            heightRange = 7;
+                            break;
+                        case 8: // forward
+                            startingHeight = 11;
+                            heightRange = 8;
+                            break;
+                        case 9: // big
+                            startingHeight = 15;
+                            heightRange = 5;
+                            break;
+                    }
+                    limitedHeightsArray.add(heightsArray.get(0));
+                    for (int i = startingHeight; i < startingHeight + heightRange; i++) {
+                        limitedHeightsArray.add(heightsArray.get(i));
+                    }
+                    ArrayAdapter<String> heightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, limitedHeightsArray);
+                    heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    heightSpinner.setAdapter(heightAdapter);
+                }
                 break;
+
             case R.id.height_spinner:
                 height = parent.getItemAtPosition(pos).toString();
                 myIntent.putExtra("height", height);
+                if (pos == 0) {
+                    weightSpinner.setVisibility(View.INVISIBLE);
+                } else {
+                    weightSpinner.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(this, "" + parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+
+                    // set weight limits based on height
+                    List<String> limitedWeightsArray = new ArrayList<String>();
+                    int startingWeight = 0;
+                    int weightRange = 0;
+                    switch (pos) {
+                        case 0: // no height selected
+                            startingWeight = 0;
+                            weightRange = 0;
+                            break;
+                        case 1: // 5'7"
+                            startingWeight = 1;
+                            weightRange = 12;
+                            break;
+                        case 2: // 5'8"
+                            startingWeight = 2;
+                            weightRange = 12;
+                            break;
+                        case 3: // 5'9"
+                            startingWeight = 3;
+                            weightRange = 12;
+                            break;
+                        case 4: // 5'10"
+                            startingWeight = 4;
+                            weightRange = 12;
+                            break;
+                        case 5: // 5'11"
+                            startingWeight = 5;
+                            weightRange = 12;
+                            break;
+                        case 6: // 6'0"
+                            startingWeight = 6;
+                            weightRange = 12;
+                            break;
+                        case 7: // 6'1"
+                            startingWeight = 7;
+                            weightRange = 12;
+                            break;
+                        case 8: // 6'2"
+                            startingWeight = 8;
+                            weightRange = 12;
+                            break;
+                        case 9: // 6'3"
+                            startingWeight = 9;
+                            weightRange = 12;
+                            break;
+                        case 10: // 6'4"
+                            startingWeight = 10;
+                            weightRange = 13;
+                            break;
+                        case 11: // 6'5"
+                            startingWeight = 11;
+                            weightRange = 14;
+                            break;
+                        case 12: // 6'6"
+                            startingWeight = 12;
+                            weightRange = 15;
+                            break;
+                        case 13: // 6'7"
+                            startingWeight = 13;
+                            weightRange = 16;
+                            break;
+                        case 14: // 6'8"
+                            startingWeight = 14;
+                            weightRange = 17;
+                            break;
+                        case 15: // 6'9"
+                            startingWeight = 15;
+                            weightRange = 18;
+                            break;
+                        case 16: // 6'10"
+                            startingWeight = 16;
+                            weightRange = 19;
+                            break;
+                        case 17: // 6'11"
+                            startingWeight = 17;
+                            weightRange = 20;
+                            break;
+                        case 18: // 7'0"
+                            startingWeight = 18;
+                            weightRange = 21;
+                            break;
+                        case 19: // 7'1"
+                            startingWeight = 19;
+                            weightRange = 22;
+                            break;
+                        case 20: // 7'2"
+                            startingWeight = 20;
+                            weightRange = 23;
+                            break;
+                    }
+                    limitedWeightsArray.add(weightsArray.get(0));
+                    for (int i = startingWeight; i < startingWeight + weightRange; i++) {
+                        limitedWeightsArray.add(weightsArray.get(i));
+                    }
+                    ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, limitedWeightsArray);
+                    weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    weightSpinner.setAdapter(weightAdapter);
+                }
                 break;
+
             case R.id.weight_spinner:
                 weight = parent.getItemAtPosition(pos).toString();
                 myIntent.putExtra("weight", weight);
         }
 
 
-        if (pos == 0) {
-            heightSpinner.setVisibility(View.INVISIBLE);
-            weightSpinner.setVisibility(View.INVISIBLE);
-        } else {
-            heightSpinner.setVisibility(View.VISIBLE);
-            weightSpinner.setVisibility(View.VISIBLE);
-
-            position = parent.getItemAtPosition(pos).toString();
-            height = parent.getItemAtPosition(pos).toString();
-
-            // set height and weight limits
-        }
     }
 
     @Override

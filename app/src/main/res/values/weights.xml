@@ -2,6 +2,11 @@
 <resources>
     <string-array name="weights_array">
         <item>Weight</item>
+        <item>125 lbs</item>
+        <item>130 lbs</item>
+        <item>135 lbs</item>
+        <item>140 lbs</item>
+        <item>145 lbs</item>
         <item>150 lbs</item>
         <item>155 lbs</item>
         <item>160 lbs</item>
@@ -39,9 +44,6 @@
         <item>320 lbs</item>
         <item>325 lbs</item>
         <item>330 lbs</item>
-        <item>335 lbs</item>
-        <item>340 lbs</item>
-        <item>345 lbs</item>
-        <item>350 lbs</item>
+
     </string-array>
 </resources>
