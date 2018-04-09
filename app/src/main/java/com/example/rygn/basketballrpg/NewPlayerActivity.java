@@ -22,6 +22,12 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
     EditText nameInput;
     EditText jerseyInput;
 
+    String position = null;
+    String height = null;
+    String weight = null;
+
+    Intent myIntent;
+
     String[] heightArray;
 
     @Override
@@ -43,11 +49,15 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
         ArrayAdapter<CharSequence> heightAdapter = ArrayAdapter.createFromResource(this, R.array.heights_array, android.R.layout.simple_spinner_item);
         heightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightSpinner.setAdapter(heightAdapter);
+        heightSpinner.setOnItemSelectedListener(this);
 
         weightSpinner = (Spinner) findViewById(R.id.weight_spinner);
         ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(this, R.array.weights_array, android.R.layout.simple_spinner_item);
         weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         weightSpinner.setAdapter(weightAdapter);
+        weightSpinner.setOnItemSelectedListener(this);
+
+        myIntent = new Intent(NewPlayerActivity.this, MainActivity.class);
 
         Button button = (Button) findViewById(R.id.create_player_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -55,19 +65,30 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
             public void onClick(View view) {
                 String name = nameInput.getText().toString();
                 String number = jerseyInput.getText().toString();
-                String position = positionsSpinner.toString();
-                String height = heightSpinner.toString();
-                String weight = weightSpinner.toString();
 
-                Intent myIntent = new Intent(NewPlayerActivity.this, MainActivity.class);
                 myIntent.putExtra("name", name);
+                myIntent.putExtra("number", number);
                 NewPlayerActivity.this.startActivity(myIntent);
             }
         });
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        Toast.makeText(this, "" + pos, Toast.LENGTH_SHORT).show();
+
+        switch (parent.getId()) {
+            case R.id.positions_spinner:
+                position = parent.getItemAtPosition(pos).toString();
+                myIntent.putExtra("position", position);
+                break;
+            case R.id.height_spinner:
+                height = parent.getItemAtPosition(pos).toString();
+                myIntent.putExtra("height", height);
+                break;
+            case R.id.weight_spinner:
+                weight = parent.getItemAtPosition(pos).toString();
+                myIntent.putExtra("weight", weight);
+        }
+
 
         if (pos == 0) {
             heightSpinner.setVisibility(View.INVISIBLE);
@@ -76,8 +97,10 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
             heightSpinner.setVisibility(View.VISIBLE);
             weightSpinner.setVisibility(View.VISIBLE);
 
-            // set height and weight limits
+            position = parent.getItemAtPosition(pos).toString();
+            height = parent.getItemAtPosition(pos).toString();
 
+            // set height and weight limits
         }
     }
 

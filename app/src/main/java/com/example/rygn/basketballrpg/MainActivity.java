@@ -15,8 +15,17 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
+        String number = intent.getStringExtra("number");
+        String position = intent.getStringExtra("position");
+        String height = intent.getStringExtra("height");
+        String weight = intent.getStringExtra("weight");
 
         TextView nameView = findViewById(R.id.player_name_view);
+        TextView infoView = findViewById(R.id.player_info_view);
+        TextView sizeView = findViewById(R.id.player_size_view);
+
         nameView.setText(name);
+        infoView.setText("#" + number + " | " + position);
+        sizeView.setText(height + " | " + weight);
     }
 }
