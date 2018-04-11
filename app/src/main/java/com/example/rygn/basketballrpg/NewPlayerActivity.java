@@ -90,7 +90,6 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                     weightSpinner.setVisibility(View.INVISIBLE);
                 } else {
                     heightSpinner.setVisibility(View.VISIBLE);
-//                    weightSpinner.setVisibility(View.VISIBLE);
 
                     // set height limits based on position
                     List<String> limitedHeightsArray = new ArrayList<String>();
@@ -157,17 +156,45 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                 } else {
                     weightSpinner.setVisibility(View.VISIBLE);
 
-                    Toast.makeText(this, "" + parent.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-
                     // set weight limits based on height
                     List<String> limitedWeightsArray = new ArrayList<String>();
                     int startingWeight = 0;
                     int weightRange = 0;
-                    Toast.makeText(this, positionsSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT).show();
 
-//                    switch (positionsSpinner.gsitem)
+                    // adjust starting item based on altered height array per position
+                    int heightSelectionAdjustment = 0;
+                    switch (positionsSpinner.getSelectedItemPosition()) {
+                        case 0: // no position selected, 3 8 10 14
+                            break;
+                        case 1: // pg
+                            break;
+                        case 2: // sg
+                            heightSelectionAdjustment = 3;
+                            break;
+                        case 3: // sf
+                            heightSelectionAdjustment = 8;
+                            break;
+                        case 4: // pf
+                            heightSelectionAdjustment = 10;
+                            break;
+                        case 5: // c
+                            heightSelectionAdjustment = 14;
+                            break;
+                        case 6: // guard
+                            heightSelectionAdjustment = 3;
+                            break;
+                        case 7: // wing
+                            heightSelectionAdjustment = 8;
+                            break;
+                        case 8: // forward
+                            heightSelectionAdjustment = 10;
+                            break;
+                        case 9: // big
+                            heightSelectionAdjustment = 14;
+                            break;
+                    }
 
-                    switch (pos) {
+                    switch (pos + heightSelectionAdjustment) {
                         case 0: // no height selected
                             startingWeight = 0;
                             weightRange = 0;
@@ -253,6 +280,7 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                             weightRange = 23;
                             break;
                     }
+
                     limitedWeightsArray.add(weightsArray.get(0));
                     for (int i = startingWeight; i < startingWeight + weightRange; i++) {
                         limitedWeightsArray.add(weightsArray.get(i));
