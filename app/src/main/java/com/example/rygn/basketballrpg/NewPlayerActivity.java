@@ -163,6 +163,10 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                     List<String> limitedWeightsArray = new ArrayList<String>();
                     int startingWeight = 0;
                     int weightRange = 0;
+                    Toast.makeText(this, positionsSpinner.getSelectedItemPosition() + "", Toast.LENGTH_SHORT).show();
+
+//                    switch (positionsSpinner.gsitem)
+
                     switch (pos) {
                         case 0: // no height selected
                             startingWeight = 0;
