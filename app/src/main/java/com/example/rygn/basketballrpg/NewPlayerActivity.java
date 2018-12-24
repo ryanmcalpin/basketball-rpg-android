@@ -1,6 +1,8 @@
 package com.example.rygn.basketballrpg;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -74,6 +76,32 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                 NewPlayerActivity.this.startActivity(myIntent);
             }
         });
+
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog alertDialog = new AlertDialog.Builder(NewPlayerActivity.this).create();
+        alertDialog.setTitle("Quit now?");
+        alertDialog.setMessage("This player will not be saved.");
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+        alertDialog.show();
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -293,7 +321,6 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                 weight = parent.getItemAtPosition(pos).toString();
                 myIntent.putExtra("weight", weight);
         }
-
 
     }
 
