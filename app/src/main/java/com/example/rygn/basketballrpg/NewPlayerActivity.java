@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +43,31 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
 
         nameInput = (EditText) findViewById(R.id.nameInput);
         jerseyInput = (EditText) findViewById(R.id.numberInput);
-
         positionsSpinner = (Spinner) findViewById(R.id.positions_spinner);
+
+        jerseyInput.setVisibility(View.INVISIBLE);
+        positionsSpinner.setVisibility(View.INVISIBLE);
+
+        nameInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (nameInput.getText().toString() != "") {
+                    jerseyInput.setVisibility(View.VISIBLE);
+                    jerseyInput.requestFocus();
+                }
+                return false;
+            }
+        });
+        jerseyInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (jerseyInput.getText().toString() != "") {
+                    positionsSpinner.setVisibility(View.VISIBLE);
+                }
+                return false;
+            }
+        });
+
         ArrayAdapter<CharSequence> positionsAdapter = ArrayAdapter.createFromResource(this, R.array.positions_array, android.R.layout.simple_spinner_item);
         positionsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         positionsSpinner.setAdapter(positionsAdapter);
@@ -85,7 +111,7 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
     @Override
     public void onBackPressed() {
         AlertDialog alertDialog = new AlertDialog.Builder(NewPlayerActivity.this).create();
-        alertDialog.setTitle("Quit now?");
+        alertDialog.setTitle("Quit player creation?");
         alertDialog.setMessage("This player will not be saved.");
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
                 new DialogInterface.OnClickListener() {
