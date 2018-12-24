@@ -17,13 +17,22 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        final Intent intent = new Intent(MenuActivity.this, NewPlayerActivity.class);
+        final Intent npIntent = new Intent(MenuActivity.this, NewPlayerActivity.class);
+        final Intent cIntent = new Intent(MenuActivity.this, GameActivity.class);
 
         Button newGameButton = (Button) findViewById(R.id.new_game_button);
+        Button continueButton = (Button) findViewById(R.id.continue_button);
+
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MenuActivity.this.startActivity(intent);
+                MenuActivity.this.startActivity(npIntent);
+            }
+        });
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MenuActivity.this.startActivity(cIntent);
             }
         });
     }
