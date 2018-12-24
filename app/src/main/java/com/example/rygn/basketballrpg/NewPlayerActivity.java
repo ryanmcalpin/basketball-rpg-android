@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -93,13 +94,7 @@ public class NewPlayerActivity extends Activity implements AdapterView.OnItemSel
                         finish();
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", (Message) null);
 
         alertDialog.show();
     }
