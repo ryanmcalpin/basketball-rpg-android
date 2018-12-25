@@ -20,6 +20,14 @@ public class GameActivity extends AppCompatActivity {
     int lBlk = 0;
     int games = 0;
 
+    double p36Pts = 8;
+    double p36Ast = 2;
+    double p36Reb = 2;
+    double p36Stl = 1;
+    double p36Blk = 1;
+
+    int minutesGiven = 18;
+
     TextView lMinView;
     TextView lPtsView;
     TextView lAstView;
@@ -64,12 +72,15 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void simulateGame() {
-        lMin += 1;
-        lPts += 1;
-        lAst +=1 ;
-        lReb +=1;
-        lStl+= 1;
-        lBlk+= 1;
+        double minMultiplier = minutesGiven / 36;
+
+        lMin = minutesGiven;
+//        lPts = (int) Math.round(p36Pts*minMultiplier);  // BROKEN
+//        lAst += 1;
+//        lReb += 1;
+//        lStl += 1;
+//        lBlk += 1;
+
         games += 1;
 
         updateViews();
